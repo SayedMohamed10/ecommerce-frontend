@@ -14,7 +14,7 @@ const Home = () => {
   const fetchFeaturedProducts = async () => {
     try {
       const response = await API.get('/products?page=0&size=6');
-      setFeaturedProducts(response.data.content || []);
+      setFeaturedProducts(response.data.products || []);
     } catch (error) {
       console.error('Failed to fetch products:', error);
     } finally {
@@ -117,7 +117,7 @@ const Home = () => {
                   <div key={product.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300">
                     <div className="relative overflow-hidden">
                       <img
-                        src={product.mainImage || 'https://via.placeholder.com/400'}
+                        src={product.images?.[0] || 'https://via.placeholder.com/400'}
                         alt={product.name}
                         className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
                       />

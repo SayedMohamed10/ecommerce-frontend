@@ -48,8 +48,8 @@ const Products = () => {
       if (category) url += `&category=${category}`;
       
       const response = await API.get(url);
-      setProducts(response.data.content || []);
-      setTotalPages(response.data.totalPages || 0);
+      setProducts(response.data.products || []);
+      setTotalPages(response.data.pagination?.totalPages || 0);
     } catch (error) {
       console.error('Failed to fetch products:', error);
     } finally {
@@ -287,7 +287,7 @@ const Products = () => {
                       <div className="relative overflow-hidden">
                         <Link to={`/products/${product.id}`}>
                           <img
-                            src={product.mainImage || 'https://via.placeholder.com/400'}
+                            src={product.images?.[0] || 'https://via.placeholder.com/400'}
                             alt={product.name}
                             className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
                           />
